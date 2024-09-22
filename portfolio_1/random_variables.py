@@ -1,5 +1,5 @@
 """
-This is code for Project 1. 
+This is code for Project 1. Here we simulate bus lateness as a function of exponential distribution.
 """
 
 import numpy as np
