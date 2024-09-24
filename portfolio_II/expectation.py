@@ -6,17 +6,14 @@ import numpy as np
 import scipy.stats
 import matplotlib.pyplot as plt
 
-import numpy as np
-import scipy.stats
-import matplotlib.pyplot as plt
-
+# finds sample mean (for expo dist)
 def sample_mean(n):
     sum = 0
     for i in range(n):
         sum += np.random.exponential(1) 
     return sum / n
 
-
+# finds sample variance 
 def variance(n):
     total_squared = 0
     total = 0
@@ -27,15 +24,6 @@ def variance(n):
     mean = total / n
     var = (n/(n-1))*(total_squared/n-(mean*mean))
     return var
-
-
-def mean_with_errors(n):
-    mean = sample_mean(n)
-    var = variance(n) / n
-    lower = mean + scipy.stats.norm.ppf(0.05) * (var ** 0.5)
-    upper = mean + scipy.stats.norm.ppf(0.95) * (var ** 0.5)
-    return lower, mean, upper
-
 
 def plot_convergence(sample_sizes, num_trials):
     plt.figure(figsize=(10, 6))
@@ -56,6 +44,7 @@ def plot_convergence(sample_sizes, num_trials):
     plt.ylabel('cumulative average of sample means')
     plt.title('convergence of sample means for exponential distribution')
     plt.legend()
+    plt.savefig('portfolio_II/figure_1.png')
     plt.show()
 
 # usage
