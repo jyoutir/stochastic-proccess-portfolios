@@ -39,7 +39,6 @@ def plot_convergence(sample_sizes, num_trials):
         plt.plot(range(1, num_trials + 1), cumulative_means, label=f'n={size}')
 
     plt.axhline(y=1.0, color='r', linestyle='--', label='true mean')
-    plt.xscale('log')
     plt.xlabel('no. of trials')
     plt.ylabel('cumulative average of sample means')
     plt.title('convergence of sample means for exponential distribution')
@@ -49,7 +48,7 @@ def plot_convergence(sample_sizes, num_trials):
 
 # usage
 sample_sizes = [10, 100, 1000]
-num_trials = 10000
+num_trials = 1000
 
 plot_convergence(sample_sizes, num_trials)
 
