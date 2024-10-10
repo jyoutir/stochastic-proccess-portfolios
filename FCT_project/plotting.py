@@ -1,30 +1,37 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
+import os
 
-# Load the CSV file into a DataFrame
-csv_file_path = './data/Enn-Bel_25thDec.csv'
-data = pd.read_csv(csv_file_path)
+def plot_and_save(csv_file, output_dir):
+    data = pd.read_csv(csv_file)
+    data['Date and Time'] = pd.to_datetime(data['Date and Time'])
+    data['Travel Time (mins)'] = data['Travel Time'].str.split().apply(lambda x: int(x[0])*60 + int(x[-2]) if 'hour' in x else int(x[0]))
 
-data['Date and Time'] = pd.to_datetime(data['Date and Time'])
+    filename = os.path.basename(csv_file)
+    from_city, to_city = filename.replace('.csv', '').split('_')[0].split('-')
+    
+    fig, ax = plt.subplots(figsize=(12, 6))
+    ax.plot(data['Date and Time'], data['Travel Time (mins)'], marker='o', linestyle='-')
+    ax.set(title=f'Travel Time from {from_city} to {to_city}',
+           xlabel='Time', ylabel='Travel Time (minutes)')
+    
+    ax.xaxis.set_major_formatter(mdates.DateFormatter('%H:%M'))
+    ax.xaxis.set_major_locator(mdates.HourLocator(interval=2))
+    plt.gcf().autofmt_xdate()
+    ax.grid(True)
 
-# convert travel time to mins
-def convert_to_minutes(travel_time_str):
-    parts = travel_time_str.split()
-    hours = int(parts[0]) if 'hour' in parts else 0
-    minutes = int(parts[2]) if 'mins' in parts else 0
-    return hours * 60 + minutes
+    min_time, max_time = data['Travel Time (mins)'].agg(['min', 'max'])
+    y_range = max_time - min_time
+    ax.set_ylim(max(0, min_time - 0.1 * y_range), max_time + 0.1 * y_range)
 
-data['Travel Time (mins)'] = data['Travel Time'].apply(convert_to_minutes)
+    plt.savefig(os.path.join(output_dir, filename.replace('.csv', '.png')), bbox_inches='tight')
+    plt.close()
 
 
-plt.figure(figsize=(12, 6))
-plt.plot(data['Date and Time'], data['Travel Time (mins)'], marker='o', linestyle='-')
-plt.title('Travel Time from Enniskillen to Belfast on 25th Dec 2025')
-plt.xlabel('Date and Time')
-plt.ylabel('Travel Time (minutes)')
-plt.xticks(rotation=45)
-plt.grid(True)
-plt.tight_layout()
+timeseries_dir = 'FCT_project/data/timeseries'
+figures_dir = 'FCT_project/data/figures'
+os.makedirs(figures_dir, exist_ok=True)
 
-# Show the plot
-plt.show()
+for csv_file in [f for f in os.listdir(timeseries_dir) if f.endswith('.csv')]:
+    plot_and_save(os.path.join(timeseries_dir, csv_file), figures_dir)
