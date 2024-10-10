@@ -1,3 +1,8 @@
+"""
+This is code for portfolio IV. Here we simulate median stock returns with error bars for different probabilities. 
+"""
+
+
 import numpy as np
 import matplotlib.pyplot as plt
 
