@@ -1,7 +1,5 @@
-"""
-This is code for all API requssts. 
-"""
 import csv
+import os
 import requests
 from datetime import datetime, timedelta
 
@@ -34,10 +32,14 @@ def traffic_data(api_key, origin, destination, start_time, end_time, interval):
         current_time += timedelta(minutes=interval)
     
     filename = f"{origin[:3]}-{destination[:3]}_{start_time.strftime('%dth%b')}.csv"
+    filepath = os.path.join('FCT_project', 'data', 'timeseries', filename)
     
-    with open(filename, 'w', newline='') as csvfile:
+    # Ensure the directory exists
+    os.makedirs(os.path.dirname(filepath), exist_ok=True)
+    
+    with open(filepath, 'w', newline='') as csvfile:
         csvwriter = csv.writer(csvfile)
         csvwriter.writerow(['Date and Time', 'Travel Time'])
         csvwriter.writerows(data_rows)
     
-    print(f"Data saved to {filename}")
+    print(f"Data saved to {filepath}")
