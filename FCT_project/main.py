@@ -3,12 +3,20 @@ This is MAIN code for FCT PROJECT. Here we call Google API.
 """
 
 import os
-from api_calls import get_traffic_data
+import csv
+from api_calls import traffic_data
+from datetime import datetime, timedelta
 
 
 api_key = 'AIzaSyDDIVtSMMLEydyxNg6sjkNw5qLuoxwkdis'  # API key
-origin = 'New York, NY'  
-destination = 'Los Angeles, CA'  
+origin = 'Enniskillen, UK'  
+destination = 'Belfast, UK'  
 
-get_traffic_data(api_key, origin, destination)
+# format : (yr, mnth, day, hr, mins)
+start_time = datetime(2025, 12, 25, 0, 0)  
+end_time = datetime(2025, 12, 26, 0, 0) 
+interval = 10
+
+# historical
+traffic_data(api_key, origin, destination, start_time, end_time, interval)
 
