@@ -1,3 +1,4 @@
 .DS_Store
-portfolio_II/.DS_Store
-FCT_project/__pycache__
+.pyc
+**/__pycache__
+**/*.pyc
