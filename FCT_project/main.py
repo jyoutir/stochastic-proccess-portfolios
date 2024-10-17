@@ -7,7 +7,7 @@ from datetime import datetime, timedelta
 
 
 api_key = 'AIzaSyDDIVtSMMLEydyxNg6sjkNw5qLuoxwkdis'  # API key
-origin = 'Newtownards, UK' 
+origin = 'Enniskillen, UK' 
 destination = 'Belfast, UK' 
 
 # NOTE:     format - (yr, mnth, day, hr, mins)
