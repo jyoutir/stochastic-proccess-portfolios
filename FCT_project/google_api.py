@@ -1,5 +1,5 @@
 """
-This is MAIN code for FCT PROJECT. Here we call Google API. 
+Block for calling Google Cloud API. 
 """
 
 from api_calls import traffic_data
