@@ -28,7 +28,7 @@ def categorize_and_append_states(file_path):
     df['Travel Minutes'] = df['Travel Time'].apply(convert_to_minutes)
     
     # Define bins for Low, Medium, High using quantiles for each dataset separately
-    low_threshold, high_threshold = df['Travel Minutes'].quantile([0.33, 0.66]).tolist()
+    low_threshold, high_threshold = df['Travel Minutes'].quantile([0.6, 0.9]).tolist()
     
     # Categorize travel times into states
     df['State'] = df['Travel Minutes'].apply(assign_state, args=(low_threshold, high_threshold))
@@ -37,5 +37,5 @@ def categorize_and_append_states(file_path):
     df.to_csv(file_path, index=False)
 
 # Example usage
-file_path = './FCT_project/data/timeseries/Enn-Bel_10thDec.csv'
+file_path = './FCT_project/data/timeseries/Bel-Enn_25thDec.csv'
 categorize_and_append_states(file_path)

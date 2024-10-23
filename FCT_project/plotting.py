@@ -1,6 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
+from matplotlib.lines import Line2D
 import os
 
 def plot_and_save(csv_file, output_dir):
@@ -10,10 +11,23 @@ def plot_and_save(csv_file, output_dir):
 
     filename = os.path.basename(csv_file)
     from_city, to_city = filename.replace('.csv', '').split('_')[0].split('-')
+    date_str = filename.split('_')[1].replace('.csv', '')  # Extract date from filename
     
     fig, ax = plt.subplots(figsize=(12, 6))
-    ax.plot(data['Date and Time'], data['Travel Time (mins)'], marker='o', linestyle='-')
-    ax.set(title=f'Travel Time from {from_city} to {to_city}',
+    
+    if 'State' in data.columns:
+        colors = {'Low': 'green', 'Medium': 'orange', 'High': 'red'}
+        for i in range(len(data)-1):
+            ax.plot(data['Date and Time'].iloc[i:i+2], 
+                   data['Travel Time (mins)'].iloc[i:i+2], 
+                   color=colors[data['State'].iloc[i]], 
+                   marker='o', linestyle='-')
+        legend_elements = [Line2D([0], [0], color=c, label=s) for s, c in colors.items()]
+        ax.legend(handles=legend_elements)
+    else:
+        ax.plot(data['Date and Time'], data['Travel Time (mins)'], marker='o', linestyle='-')
+    
+    ax.set(title=f'Travel Time from {from_city} to {to_city} ({date_str})',
            xlabel='Time', ylabel='Travel Time (minutes)')
     
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%H:%M'))
@@ -27,7 +41,6 @@ def plot_and_save(csv_file, output_dir):
 
     plt.savefig(os.path.join(output_dir, filename.replace('.csv', '.png')), bbox_inches='tight')
     plt.close()
-
 
 timeseries_dir = 'FCT_project/data/timeseries'
 figures_dir = 'FCT_project/data/figures'
