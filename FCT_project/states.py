@@ -3,6 +3,7 @@ Block for generating transition matricies from ./FCT_project/data/timeseries/25O
 """
 
 import pandas as pd
+import os
 
 def convert_to_minutes(travel_time):
     """Convert travel time in e.g '1 hour 30 mins' format -> total minutes."""
@@ -36,6 +37,10 @@ def categorize_and_append_states(file_path):
     # Save the updated DataFrame back to the CSV file, appending the 'State' column
     df.to_csv(file_path, index=False)
 
-# Example usage
-file_path = './FCT_project/data/timeseries/Bel-Enn_25thDec.csv'
-categorize_and_append_states(file_path)
+
+# iterate script over these 
+directory = './FCT_project/data/timeseries/25Oct-to-Nov'
+for filename in os.listdir(directory):
+    if filename.endswith('.csv'):
+        file_path = os.path.join(directory, filename)
+        categorize_and_append_states(file_path)

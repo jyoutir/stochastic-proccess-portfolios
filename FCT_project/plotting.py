@@ -1,3 +1,8 @@
+"""
+Block for generating pltos from ./FCT_project/data/timeseries/25Oct-to-Nov.
+Plots coloured chart of period of low medium high.
+"""
+
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
@@ -42,8 +47,8 @@ def plot_and_save(csv_file, output_dir):
     plt.savefig(os.path.join(output_dir, filename.replace('.csv', '.png')), bbox_inches='tight')
     plt.close()
 
-timeseries_dir = 'FCT_project/data/timeseries'
-figures_dir = 'FCT_project/data/figures'
+timeseries_dir = 'FCT_project/data/timeseries/25Oct-to-Nov'
+figures_dir = 'FCT_project/data/figures/25Oct-to-Nov'
 os.makedirs(figures_dir, exist_ok=True)
 
 for csv_file in [f for f in os.listdir(timeseries_dir) if f.endswith('.csv')]:
