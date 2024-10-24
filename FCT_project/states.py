@@ -24,17 +24,11 @@ def assign_state(minutes, low_threshold, high_threshold):
 def categorize_and_append_states(file_path):
     """Categorize travel times into states and append the states to the CSV file."""
     df = pd.read_csv(file_path)
-    
-    # Convert travel times to minutes
     df['Travel Minutes'] = df['Travel Time'].apply(convert_to_minutes)
     
     # Define bins for Low, Medium, High using quantiles for each dataset separately
     low_threshold, high_threshold = df['Travel Minutes'].quantile([0.6, 0.9]).tolist()
-    
-    # Categorize travel times into states
     df['State'] = df['Travel Minutes'].apply(assign_state, args=(low_threshold, high_threshold))
-    
-    # Save the updated DataFrame back to the CSV file, appending the 'State' column
     df.to_csv(file_path, index=False)
 
 
