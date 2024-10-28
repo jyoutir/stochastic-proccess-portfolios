@@ -1,11 +1,11 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-# transition matrix with hypothetical probabilities
+# transition matrix 
 transition_matrix = np.array([
-    [0.8, 0.1, 0.1],  # G to G, Y, R
-    [0.2, 0.7, 0.1],  # Y to G, Y, R
-    [0.1, 0.2, 0.7]   # R to G, Y, R
+    [0.1, 0.9, 0.0],  # G to G, Y, R
+    [0.0, 0.2, 0.8],  # Y to G, Y, R
+    [0.7, 0.0, 0.3]   # R to G, Y, R
 ])
 
 # function to simulate Markov chain
