@@ -19,7 +19,7 @@ import csv
 # ============== Change the information in this block ==============
 
 # Your Google Cloud API key (Replace this with your own key)
-api_key = 'AIzaSyDDIVtSMMLEydyxNg6sjkNw5qLuoxwkdis'
+api_key = 'YOUR API KEY GOES HERE'
 
 # Set your origin and destination points
 origin = 'Enniskillen, UK' 
@@ -38,7 +38,7 @@ save_directory = "."
 
 
 
-# ==== no need to alter anything below this. Feel free to use an AI IDE like Cursor to understand this  =======
+# ==== no need to alter anything below this. Feel free to use AI to understand this  =======
 
 def traffic_data(api_key, origin, destination, start_time, end_time, interval, save_directory="."):
     """
