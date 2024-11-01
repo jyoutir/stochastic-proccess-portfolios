@@ -38,7 +38,8 @@ save_directory = "."
 
 
 
-# ==== no need to alter anything below this. Feel free to use AI to understand this  =======
+# ================== no need to alter anything below this. ===========================================
+# ================== Feel free to use an AI tool Cursor/ PearAI to understand this  ==================
 
 def traffic_data(api_key, origin, destination, start_time, end_time, interval, save_directory="."):
     """
