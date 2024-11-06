@@ -15,6 +15,7 @@ You need a Google Cloud API key. To do this, go to:
 from datetime import datetime, timedelta
 import os
 import csv
+import requests
 
 # ============== Change the information in this block ==============
 
@@ -39,7 +40,7 @@ save_directory = "."
 
 
 # ================== no need to alter anything below this. ===========================================
-# ================== Feel free to use an AI tool Cursor/ PearAI to understand this  ==================
+# ================== Feel free to use an AI tool like Cursor to understand this  ==================
 
 def traffic_data(api_key, origin, destination, start_time, end_time, interval, save_directory="."):
     """
