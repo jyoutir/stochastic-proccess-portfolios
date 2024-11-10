@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 class TimeVaryingPollingQueue:
-    def __init__(self, base_rate=5, service_rate=15, capacity=None):
+    def __init__(self, base_rate=10, service_rate=15, capacity=None):
         """
         Time-Varying Polling Station Queue Simulator
         
@@ -95,6 +95,7 @@ class TimeVaryingPollingQueue:
         ax2.legend()
         
         plt.tight_layout()
+        plt.savefig('portfolio_IX/figure_1.png', dpi=300, bbox_inches='tight')
         plt.show()
         
         print("\nSimulation Results:")
