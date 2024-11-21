@@ -1,0 +1,4 @@
+State Mean Probability     Standard Error       95% Confidence Interval       
+G     0.2955          0.0020          [0.2916, 0.2994]
+Y     0.3305          0.0025          [0.3255, 0.3355]
+R     0.3740          0.0031          [0.3680, 0.3800]
