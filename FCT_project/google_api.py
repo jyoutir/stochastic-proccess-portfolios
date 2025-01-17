@@ -6,7 +6,7 @@ from api_calls import traffic_data
 from datetime import datetime, timedelta
 
 
-api_key = 'AIzaSyDDIVtSMMLEydyxNg6sjkNw5qLuoxwkdis'  # API key
+api_key = 'blank'  # API key
 origin = 'Enniskillen, UK' 
 destination = 'Belfast, UK' 
 
